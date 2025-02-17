@@ -7,8 +7,6 @@ function ArticleList() {
 
   useEffect(() => {
     fetchArticles().then((ArticlesFromApi) => {
-      console.log(ArticlesFromApi);
-
       setArticles(ArticlesFromApi);
     });
   }, []);

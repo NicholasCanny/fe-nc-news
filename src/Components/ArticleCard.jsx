@@ -17,7 +17,7 @@ function ArticleCard({
       <p>Topic: {topic}</p>
       <p>Author: {author}</p>
       <p>
-        Date:{" "}
+        Date:
         {new Date(created_at).toLocaleString([], {
           dateStyle: "short",
           timeStyle: "short",
