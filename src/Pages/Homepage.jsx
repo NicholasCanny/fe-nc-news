@@ -2,11 +2,12 @@ import ArticleList from "../Components/ArticleList";
 
 function HomePage() {
   return (
-    <div>
-      <h1 className="h1">WELCOME TO NC NEWS</h1>
+    <header>
+      <h1 className="header">WELCOME TO NC NEWS</h1>
+      <p className="header">Here is a list of all available articles</p>
 
       <ArticleList />
-    </div>
+    </header>
   );
 }
 
