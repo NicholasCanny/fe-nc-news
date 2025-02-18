@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import FormatDate from "./FormatDate";
 
 function ArticleCard({ article }) {
   const {
@@ -18,15 +19,13 @@ function ArticleCard({ article }) {
         alt={`image of ${article_img_url}`}
         className="article-img"
       />
-      <p>Title: {title}</p>
+      <p>
+        <strong>{title}</strong>
+      </p>
       <p>Topic: {topic}</p>
       <p>Author: {author}</p>
       <p>
-        Date:{" "}
-        {new Date(created_at).toLocaleString([], {
-          dateStyle: "short",
-          timeStyle: "short",
-        })}
+        Published on: <FormatDate date={created_at} />
       </p>
 
       <Link to={`/articles/${article_id}`}>
