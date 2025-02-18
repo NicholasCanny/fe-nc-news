@@ -11,7 +11,7 @@ export const fetchArticles = () => {
 };
 
 export const fetchIndividualArticle = (articleID) => {
-  return ncnewsApi.get(`/articles/2`).then((response) => {
+  return ncnewsApi.get(`/articles/${articleID}`).then((response) => {
     return response.data.article;
   });
 };

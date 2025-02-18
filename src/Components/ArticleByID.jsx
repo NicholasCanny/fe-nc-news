@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchIndividualArticle } from "../api";
 
-function ArticleByID({ articleID }) {
+function ArticleByID({ article_id }) {
   const [article, setIndividualArticles] = useState(null);
 
   useEffect(() => {
-    fetchIndividualArticle(articleID).then((articleFromApi) => {
+    fetchIndividualArticle(article_id).then((articleFromApi) => {
       setIndividualArticles(articleFromApi);
     });
-  }, [articleID]);
+  }, []);
 
-  if (!article) return <p>Loading article...</p>;
+  if (!article) return <p className="h1">Loading article...</p>;
 
   return (
     <>

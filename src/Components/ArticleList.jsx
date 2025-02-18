@@ -14,15 +14,7 @@ function ArticleList() {
   return (
     <div className="grid-container">
       {articles.map((article) => (
-        <ArticleCard
-          key={article.article_id}
-          title={article.title}
-          topic={article.topic}
-          author={article.author}
-          created_at={article.created_at}
-          votes={article.votes}
-          article_img_url={article.article_img_url}
-        />
+        <ArticleCard key={article.article_id} article={article} />
       ))}
     </div>
   );

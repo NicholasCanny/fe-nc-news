@@ -10,7 +10,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/articleID" element={<ArticlePage />} />
+          <Route path="/articles/:article_id" element={<ArticlePage />} />
         </Routes>
       </div>
     </Router>
