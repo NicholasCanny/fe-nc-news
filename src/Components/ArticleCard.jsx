@@ -12,7 +12,7 @@ function ArticleCard({ article }) {
   } = article;
 
   return (
-    <div className="article-card">
+    <section className="article-card">
       <img
         src={article_img_url}
         alt={`image of ${article_img_url}`}
@@ -28,10 +28,11 @@ function ArticleCard({ article }) {
           timeStyle: "short",
         })}
       </p>
+
       <Link to={`/articles/${article_id}`}>
         <button className="button">Go to article</button>
       </Link>
-    </div>
+    </section>
   );
 }
 

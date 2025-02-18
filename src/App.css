@@ -40,15 +40,20 @@
   border-radius: 8px;
 }
 
-.h1 {
+.header {
   text-align: center;
   color: #007bff;
+  padding: 10px;
+}
 
+.header2 {
+  text-align: left;
+  color: #000000;
   padding: 10px;
 }
 
 .button {
-  background-color: #d50f0f; /* Green */
+  background-color: #d50f0f;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -56,4 +61,21 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.comment-card {
+  border: 2px solid #173aad;
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.comment-card p {
+  margin: 5px 0;
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #000000;
 }

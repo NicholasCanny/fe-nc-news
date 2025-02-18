@@ -5,11 +5,11 @@ function ArticlePage() {
   const { article_id } = useParams();
 
   return (
-    <div>
-      <h1 className="h1">WELCOME TO NC NEWS</h1>
-      <p className="h1"> Here is the article you requested</p>
+    <main>
+      <h1 className="header">WELCOME TO NC NEWS</h1>
+      <p className="header"> Here is the article you requested</p>
       <ArticleByID article_id={article_id} />
-    </div>
+    </main>
   );
 }
 
