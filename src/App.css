@@ -16,6 +16,24 @@
   text-align: center;
 }
 
+.individual-article-card {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
 .article-img {
   width: 100%;
   height: auto;
@@ -27,4 +45,15 @@
   color: #007bff;
 
   padding: 10px;
+}
+
+.button {
+  background-color: #d50f0f; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

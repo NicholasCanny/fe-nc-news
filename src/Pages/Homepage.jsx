@@ -4,7 +4,7 @@ function HomePage() {
   return (
     <div>
       <h1 className="h1">WELCOME TO NC NEWS</h1>
-      <p></p>
+
       <ArticleList />
     </div>
   );
