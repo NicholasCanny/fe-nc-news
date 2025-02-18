@@ -21,3 +21,11 @@ export const fetchComments = (articleID) => {
     return response.data.comments;
   });
 };
+
+export const changeVote = (articleID, addorsubtract) => {
+  return ncnewsApi
+    .patch(`/articles/${articleID}`, { inc_votes: addorsubtract })
+    .then((response) => {
+      return response.data.article;
+    });
+};

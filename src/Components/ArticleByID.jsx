@@ -3,11 +3,13 @@ import { fetchIndividualArticle } from "../api";
 import { fetchComments } from "../api";
 import CommentCard from "./CommentCard";
 import LoadingComponent from "./LoadingComponent";
+import { changeVote } from "../api";
 
 function ArticleByID({ article_id }) {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchIndividualArticle(article_id).then((articleFromApi) => {
@@ -22,6 +24,20 @@ function ArticleByID({ article_id }) {
     });
   }, [article_id]);
 
+  function handleVote(type) {
+    changeVote(article_id, type)
+      .then(() => {
+        setArticle({
+          ...article,
+          votes: article.votes + type,
+        });
+        setError(null);
+      })
+      .catch((err) => {
+        setError("Your vote was not successful");
+      });
+  }
+
   if (loading) {
     return <LoadingComponent input="article" />;
   }
@@ -35,6 +51,26 @@ function ArticleByID({ article_id }) {
       <p>{article.body}</p>
       <p>Author: {article.author}</p>
       <p>Topic: {article.topic}</p>
+      <p>
+        Votes: {article.votes}{" "}
+        <button
+          className="likebutton"
+          onClick={() => {
+            handleVote(1);
+          }}
+        >
+          👍
+        </button>
+        <button
+          className="likebutton"
+          onClick={() => {
+            handleVote(-1);
+          }}
+        >
+          👎
+        </button>
+      </p>
+      {error && <p>{error}</p>}
       <p>
         Date:
         {new Date(article.created_at).toLocaleString([], {
