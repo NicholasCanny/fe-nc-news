@@ -15,9 +15,10 @@ function CommentForm({ article_id, handleNewComment }) {
 
   return (
     <div>
-      <button>Add</button>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+      <form className="form" onSubmit={handleSubmit}>
+        <label htmlFor="username">
+          <strong>Username</strong>
+        </label>
         <input
           id="username"
           type="text"
@@ -25,14 +26,22 @@ function CommentForm({ article_id, handleNewComment }) {
           required
         ></input>
         <br />
-        <label htmlFor="body">Body</label>
+        <label htmlFor="body">
+          <strong>Body</strong>
+        </label>
         <input
           id="body"
           type="text"
           placeholder="This article is bodacious!"
+          required
         ></input>
         <br />
-        <input value="Submit" id="submit" type="submit"></input>
+        <input
+          className="button"
+          value="Submit"
+          id="submit"
+          type="submit"
+        ></input>
       </form>
     </div>
   );

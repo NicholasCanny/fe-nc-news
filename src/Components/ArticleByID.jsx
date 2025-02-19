@@ -38,12 +38,14 @@ function ArticleByID({ article_id }) {
       });
   }
 
-  if (loading) {
-    return <LoadingComponent input="article" />;
+  function handleNewComment() {
+    fetchComments(article_id).then((updatedComments) => {
+      setComments(updatedComments);
+    });
   }
 
-  function handleNewComment(newComment) {
-    setComments([...comments, newComment]);
+  if (loading) {
+    return <LoadingComponent input="article" />;
   }
 
   return (
@@ -59,7 +61,10 @@ function ArticleByID({ article_id }) {
       </p>
       <p>{article.body}</p>
       <p>
-        {article.votes} {article.votes < 2 ? "vote" : "votes"}
+        <strong>
+          {" "}
+          {article.votes} {article.votes === 1 ? "vote" : "votes"}
+        </strong>
         <button
           className="likebutton"
           onClick={() => {
@@ -79,15 +84,24 @@ function ArticleByID({ article_id }) {
       </p>
       {error && <p>{error}</p>}
       <p>
-        Published on: <FormatDate date={article.created_at} />
+        <strong> Published on:</strong> <FormatDate date={article.created_at} />
       </p>
-      <p>Article ID: {article.article_id}</p>
-      <p className="header">Comments</p>
+      <p>
+        <strong>Article ID:</strong> {article.article_id}
+      </p>
+      <p className="header">
+        <strong>Comments Section</strong>
+      </p>
+      <p>
+        <strong>Post Comment</strong>
+      </p>
       <CommentForm
         article_id={article.article_id}
         handleNewComment={handleNewComment}
       />
-
+      <p>
+        <strong>View Comments</strong>
+      </p>
       {comments.length > 0 ? (
         comments.map((comment) => (
           <CommentCard key={comment.comment_id} comment={comment} />

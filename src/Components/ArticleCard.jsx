@@ -22,10 +22,14 @@ function ArticleCard({ article }) {
       <p>
         <strong>{title}</strong>
       </p>
-      <p>Topic: {topic}</p>
-      <p>Author: {author}</p>
       <p>
-        Published on: <FormatDate date={created_at} />
+        <strong>Topic:</strong> {topic}
+      </p>
+      <p>
+        <strong>Author:</strong> {author}
+      </p>
+      <p>
+        <strong>Published on:</strong> <FormatDate date={created_at} />
       </p>
 
       <Link to={`/articles/${article_id}`}>

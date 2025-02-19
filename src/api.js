@@ -31,11 +31,9 @@ export const changeVote = (articleID, addOrSubtract) => {
 };
 
 export const postComment = (article_id, comment) => {
-  console.log(comment);
   return ncnewsApi
     .post(`/articles/${article_id}/comments`, comment)
     .then((response) => {
-      console.log(response);
       return response.data.comment;
     });
 };

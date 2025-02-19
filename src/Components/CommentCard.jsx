@@ -5,14 +5,19 @@ function CommentCard({ comment }) {
 
   return (
     <section className="comment-card">
-      <p className="comment-author">{author}:</p>
+      <p className="comment-author">{author}</p>
       <p>{body}</p>
       <p>
-        {votes} {votes < 2 ? "vote" : "votes"}
+        <strong>
+          {votes} {votes === 1 ? "vote" : "votes"}
+        </strong>
       </p>
-      <p>Comment_id: {comment_id}</p>
       <p>
-        Published on: <FormatDate date={created_at} />
+        <strong>Comment_id:</strong> {comment_id}
+      </p>
+      <p>
+        <strong>Published on: </strong>
+        <FormatDate date={created_at} />
       </p>
     </section>
   );

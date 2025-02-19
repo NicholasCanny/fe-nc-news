@@ -53,7 +53,7 @@
 }
 
 .button {
-  background-color: #d50f0f;
+  background-color: #230fd5;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -70,22 +70,31 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  margin: 5px 5px;
 }
 
 .comment-card {
   border: 2px solid #173aad;
-  padding: 20px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-}
-
-.comment-card p {
+  padding: 5px;
   margin: 5px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
 .comment-author {
   font-weight: bold;
   font-size: 1.5rem;
   color: #000000;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #173aad;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
 }
