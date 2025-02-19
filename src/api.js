@@ -22,10 +22,18 @@ export const fetchComments = (articleID) => {
   });
 };
 
-export const changeVote = (articleID, addorsubtract) => {
+export const changeVote = (articleID, addOrSubtract) => {
   return ncnewsApi
-    .patch(`/articles/${articleID}`, { inc_votes: addorsubtract })
+    .patch(`/articles/${articleID}`, { inc_votes: addOrSubtract })
     .then((response) => {
       return response.data.article;
+    });
+};
+
+export const postComment = (article_id, comment) => {
+  return ncnewsApi
+    .post(`/articles/${article_id}/comments`, comment)
+    .then((response) => {
+      return response.data.comment;
     });
 };

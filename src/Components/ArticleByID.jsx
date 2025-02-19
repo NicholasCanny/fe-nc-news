@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchIndividualArticle } from "../api";
-import { fetchComments } from "../api";
+import { fetchIndividualArticle, fetchComments, changeVote } from "../api";
 import CommentCard from "./CommentCard";
 import LoadingComponent from "./LoadingComponent";
-import { changeVote } from "../api";
+import CommentForm from "./CommentForm";
+import FormatDate from "./FormatDate";
 
 function ArticleByID({ article_id }) {
   const [article, setArticle] = useState(null);
@@ -24,18 +24,24 @@ function ArticleByID({ article_id }) {
     });
   }, [article_id]);
 
-  function handleVote(type) {
-    changeVote(article_id, type)
+  function handleVote(voteAdjustment) {
+    changeVote(article_id, voteAdjustment)
       .then(() => {
         setArticle({
           ...article,
-          votes: article.votes + type,
+          votes: article.votes + voteAdjustment,
         });
         setError(null);
       })
       .catch((err) => {
         setError("Your vote was not successful");
       });
+  }
+
+  function handleNewComment() {
+    fetchComments(article_id).then((updatedComments) => {
+      setComments(updatedComments);
+    });
   }
 
   if (loading) {
@@ -48,11 +54,17 @@ function ArticleByID({ article_id }) {
       <div className="image-container">
         <img src={article.article_img_url} alt={article.title} />
       </div>
-      <p>{article.body}</p>
-      <p>Author: {article.author}</p>
-      <p>Topic: {article.topic}</p>
       <p>
-        Votes: {article.votes}{" "}
+        <strong>
+          {article.author} - {article.topic}
+        </strong>
+      </p>
+      <p>{article.body}</p>
+      <p>
+        <strong>
+          {" "}
+          {article.votes} {article.votes === 1 ? "vote" : "votes"}
+        </strong>
         <button
           className="likebutton"
           onClick={() => {
@@ -72,14 +84,24 @@ function ArticleByID({ article_id }) {
       </p>
       {error && <p>{error}</p>}
       <p>
-        Date:
-        {new Date(article.created_at).toLocaleString([], {
-          dateStyle: "short",
-          timeStyle: "short",
-        })}
+        <strong> Published on:</strong> <FormatDate date={article.created_at} />
       </p>
-      <p>Article ID: {article.article_id}</p>
-      <p className="header">Comments</p>
+      <p>
+        <strong>Article ID:</strong> {article.article_id}
+      </p>
+      <p className="header">
+        <strong>Comments Section</strong>
+      </p>
+      <p>
+        <strong>Post Comment</strong>
+      </p>
+      <CommentForm
+        article_id={article.article_id}
+        handleNewComment={handleNewComment}
+      />
+      <p>
+        <strong>View Comments</strong>
+      </p>
       {comments.length > 0 ? (
         comments.map((comment) => (
           <CommentCard key={comment.comment_id} comment={comment} />
