@@ -1,7 +1,11 @@
 import FormatDate from "./FormatDate";
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
-function CommentCard({ comment }) {
+function CommentCard({ comment, deleteComment }) {
   const { author, body, comment_id, created_at, votes } = comment;
+
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <section className="comment-card">
@@ -19,6 +23,11 @@ function CommentCard({ comment }) {
         <strong>Published on: </strong>
         <FormatDate date={created_at} />
       </p>
+      {author === loggedInUser && (
+        <button className="button" onClick={() => deleteComment(comment_id)}>
+          Delete
+        </button>
+      )}
     </section>
   );
 }

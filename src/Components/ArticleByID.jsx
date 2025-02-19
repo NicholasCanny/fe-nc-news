@@ -4,12 +4,18 @@ import CommentCard from "./CommentCard";
 import LoadingComponent from "./LoadingComponent";
 import CommentForm from "./CommentForm";
 import FormatDate from "./FormatDate";
+import { removeComment } from "../api";
 
 function ArticleByID({ article_id }) {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  console.log(article);
+
+  const [upVote, setUpVote] = useState(false);
+  const [downVote, setDownVote] = useState(false);
 
   useEffect(() => {
     fetchIndividualArticle(article_id).then((articleFromApi) => {
@@ -27,21 +33,49 @@ function ArticleByID({ article_id }) {
   function handleVote(voteAdjustment) {
     changeVote(article_id, voteAdjustment)
       .then(() => {
-        setArticle({
-          ...article,
-          votes: article.votes + voteAdjustment,
-        });
+        setArticle((prevArticle) => ({
+          ...prevArticle,
+          votes: prevArticle.votes + voteAdjustment,
+        }));
         setError(null);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Your vote was not successful");
       });
+  }
+
+  function toggleUpVote() {
+    if (!upVote) {
+      handleVote(1);
+      if (downVote) {
+        setDownVote(false);
+      }
+      setUpVote(true);
+    }
+  }
+
+  function toggleDownVote() {
+    if (!downVote) {
+      handleVote(-1);
+      if (upVote) {
+        setUpVote(false);
+      }
+      setDownVote(true);
+    }
   }
 
   function handleNewComment() {
     fetchComments(article_id).then((updatedComments) => {
       setComments(updatedComments);
     });
+  }
+
+  function deleteComment(comment_id) {
+    removeComment(comment_id)
+      .then(() => fetchComments(article_id))
+      .then((updatedComments) => {
+        setComments(updatedComments);
+      });
   }
 
   if (loading) {
@@ -62,22 +96,17 @@ function ArticleByID({ article_id }) {
       <p>{article.body}</p>
       <p>
         <strong>
-          {" "}
           {article.votes} {article.votes === 1 ? "vote" : "votes"}
         </strong>
         <button
-          className="likebutton"
-          onClick={() => {
-            handleVote(1);
-          }}
+          className={`likebutton ${upVote ? "active" : ""}`}
+          onClick={toggleUpVote}
         >
           👍
         </button>
         <button
-          className="likebutton"
-          onClick={() => {
-            handleVote(-1);
-          }}
+          className={`likebutton ${downVote ? "active" : ""}`}
+          onClick={toggleDownVote}
         >
           👎
         </button>
@@ -104,7 +133,11 @@ function ArticleByID({ article_id }) {
       </p>
       {comments.length > 0 ? (
         comments.map((comment) => (
-          <CommentCard key={comment.comment_id} comment={comment} />
+          <CommentCard
+            key={comment.comment_id}
+            comment={comment}
+            deleteComment={deleteComment}
+          />
         ))
       ) : (
         <p>No comments available for this article.</p>

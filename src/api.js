@@ -37,3 +37,24 @@ export const postComment = (article_id, comment) => {
       return response.data.comment;
     });
 };
+
+export const removeComment = (comment_id) => {
+  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {
+    return;
+  });
+};
+
+export const fetchTopics = (articleID) => {
+  return ncnewsApi.get(`/topics`).then((response) => {
+    return response.data.topics;
+  });
+};
+
+export const fetchArticlesWithTopic = (sort_by, order, topic) => {
+  console.log(sort_by, order, topic);
+  return ncnewsApi
+    .get(`/articles?sort_by=${sort_by}&order=${order}&topic=${topic}`)
+    .then((response) => {
+      return response.data.articles;
+    });
+};
