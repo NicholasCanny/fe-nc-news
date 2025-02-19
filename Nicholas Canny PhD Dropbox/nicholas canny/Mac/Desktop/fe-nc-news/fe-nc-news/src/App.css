@@ -1,42 +1,114 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  justify-content: center;
+  padding: 5px;
+  border: 2px solid;
+}
+
+.article-card {
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  background-color: rgb(255, 255, 255);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.individual-article-card {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  max-width: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.article-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
-.card {
-  padding: 2em;
+.header {
+  text-align: center;
+  color: #007bff;
+  padding: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.header2 {
+  text-align: left;
+  color: #000000;
+  padding: 10px;
+}
+
+.button {
+  background-color: #230fd5;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.likebutton {
+  background-color: #0a745d;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+.comment-card {
+  border: 2px solid #173aad;
+  padding: 5px;
+  margin: 5px 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #173aad;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.navbar {
+  background-color: #f7f1f1;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+}
+
+.navbar a {
+  text-decoration: none;
+  margin-right: 10px;
 }
