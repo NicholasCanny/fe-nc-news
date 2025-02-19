@@ -13,10 +13,6 @@ function TopicPage() {
 
   const [sortBy, setSortBy] = useState("created_at");
 
-  // comment_count
-  // votes
-  // created_at
-
   const [order, setOrder] = useState("asc");
 
   const { topic } = useParams();
