@@ -31,6 +31,11 @@ function ArticleCard({ article }) {
       <p>
         <strong>Published on:</strong> <FormatDate date={created_at} />
       </p>
+      <p>
+        <strong>
+          {votes} {votes === 1 ? "vote" : "votes"}
+        </strong>
+      </p>
 
       <Link to={`/articles/${article_id}`}>
         <button className="button">Go to article</button>
