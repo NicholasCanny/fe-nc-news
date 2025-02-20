@@ -1,14 +1,15 @@
 import NavBar from "../Components/Navbar";
 import monkeyImg from "../assets/Monkey.jpeg";
 
-function MainErrorPage() {
+function ArticleErrorPage() {
   return (
     <main>
       <NavBar />
-      <h1 className="header">FAUX REDDIT</h1>
-      <p className="header2">
+      <h1 className="header">WELCOME TO NC NEWS</h1>
+      <p className="header">
         {" "}
-        Excuse me, trying to take care of business here, choose a valid page!{" "}
+        Excuse me, trying to take care of business here, try choosing a valid
+        article!{" "}
       </p>
       <img
         className="image-container"
@@ -19,4 +20,4 @@ function MainErrorPage() {
   );
 }
 
-export default MainErrorPage;
+export default ArticleErrorPage;
