@@ -3,12 +3,15 @@ import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import NavBar from "../Components/Navbar";
 import { fetchTopics, fetchArticlesWithTopic } from "../api";
 import ArticleCard from "../Components/ArticleCard";
+import TopicErrorPage from "./TopicErrorPage";
+import LoadingComponent from "../Components/LoadingComponent";
 
 function TopicPage() {
   const [topics, setTopics] = useState([]);
   const [topicArticles, setTopicArticles] = useState([]);
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("asc");
+  const [loading, setLoading] = useState(true);
 
   const { topic } = useParams();
   const navigate = useNavigate();
@@ -30,8 +33,19 @@ function TopicPage() {
   useEffect(() => {
     fetchTopics().then((topicsFromApi) => {
       setTopics(topicsFromApi);
+      setLoading(false);
     });
   }, []);
+
+  let allTopics = topics.map((topic) => topic.slug);
+
+  if (topics.length > 0 && topic && !allTopics.includes(topic)) {
+    return <TopicErrorPage incorrectTopic={topic} />;
+  }
+
+  if (loading) {
+    return <LoadingComponent input="topics" />;
+  }
 
   return (
     <>
