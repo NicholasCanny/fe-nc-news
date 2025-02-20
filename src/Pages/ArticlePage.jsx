@@ -8,7 +8,7 @@ function ArticlePage() {
   return (
     <main>
       <NavBar />
-      <h1 className="header">WELCOME TO NC NEWS</h1>
+      <h1 className="header">FAUX REDDIT</h1>
       <p className="header"> Here is the article you requested</p>
       <ArticleByID article_id={article_id} />
     </main>

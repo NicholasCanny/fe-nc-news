@@ -51,7 +51,7 @@ function TopicPage() {
     <>
       <header>
         <NavBar />
-        <h1 className="header">WELCOME TO NC NEWS</h1>
+        <h1 className="header">FAUX REDDIT</h1>
       </header>
       <main>
         <p className="header">
