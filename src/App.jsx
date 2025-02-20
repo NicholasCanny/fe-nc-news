@@ -4,6 +4,7 @@ import HomePage from "./Pages/Homepage";
 import { UseProvider } from "./UserContext";
 import ArticlePage from "./Pages/ArticlePage";
 import TopicPage from "./Pages/TopicPage";
+import MainErrorPage from "./Pages/MainErrorPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/articles/:article_id" element={<ArticlePage />} />
             <Route path="/topics" element={<TopicPage />} />
             <Route path="/topics/:topic" element={<TopicPage />} />
+            <Route path="*" element={<MainErrorPage />}></Route>
           </Routes>
         </UseProvider>
       </div>

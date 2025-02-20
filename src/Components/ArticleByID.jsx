@@ -12,8 +12,6 @@ function ArticleByID({ article_id }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(article);
-
   const [upVote, setUpVote] = useState(false);
   const [downVote, setDownVote] = useState(false);
 
@@ -82,13 +80,17 @@ function ArticleByID({ article_id }) {
     return <LoadingComponent input="article" />;
   }
 
+  if (!article) {
+    return <p>Article not found</p>;
+  }
+
   return (
     <>
       <h1 className="header2">{article.title}</h1>
       <div className="image-container">
         <img src={article.article_img_url} alt={article.title} />
       </div>
-      <p>
+      <p className="header2">
         <strong>
           {article.author} - {article.topic}
         </strong>
@@ -119,16 +121,13 @@ function ArticleByID({ article_id }) {
         <strong>Article ID:</strong> {article.article_id}
       </p>
       <p className="header">
-        <strong>Comments Section</strong>
-      </p>
-      <p>
         <strong>Post Comment</strong>
       </p>
       <CommentForm
         article_id={article.article_id}
         handleNewComment={handleNewComment}
       />
-      <p>
+      <p className="header">
         <strong>View Comments</strong>
       </p>
       {comments.length > 0 ? (

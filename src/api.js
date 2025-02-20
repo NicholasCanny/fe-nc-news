@@ -54,7 +54,6 @@ export const fetchArticlesWithTopic = (sort_by, order, topic) => {
   return ncnewsApi
     .get(`/articles?sort_by=${sort_by}&order=${order}&topic=${topic}`)
     .then((response) => {
-      console.log(response.data.articles);
       return response.data.articles;
     });
 };

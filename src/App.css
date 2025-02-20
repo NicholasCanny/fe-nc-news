@@ -1,6 +1,6 @@
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   justify-content: center;
   padding: 5px;
@@ -17,7 +17,7 @@
 }
 
 .individual-article-card {
-  max-width: 400px;
+  max-width: 100%;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -30,13 +30,15 @@
 .image-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  max-width: 400px;
+  align-items: center;
+  margin: 0 auto 20px auto;
+  width: 100%;
 }
 
 .article-img {
   width: 100%;
   height: auto;
+  max-width: 100%;
   border-radius: 8px;
 }
 
@@ -47,7 +49,7 @@
 }
 
 .header2 {
-  text-align: left;
+  text-align: center;
   color: #000000;
   padding: 10px;
 }
@@ -106,9 +108,4 @@ form {
   align-items: center;
   justify-content: space-between;
   border-radius: 8px;
-}
-
-.navbar a {
-  text-decoration: none;
-  margin-right: 10px;
 }
