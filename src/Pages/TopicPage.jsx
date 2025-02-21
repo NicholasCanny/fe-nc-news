@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import NavBar from "../Components/Navbar";
 import { fetchTopics, fetchArticles } from "../api";
-import ArticleCard from "../Components/ArticleCard";
-import TopicErrorPage from "./TopicErrorPage";
+import TopicSelector from "../Components/TopicSelector";
+import SortOrderSelector from "../Components/SetOrderSelector";
+import TopicArticleList from "../Components/TopicArticleList";
+import TopicError from "../Components/TopicError";
 import LoadingComponent from "../Components/LoadingComponent";
 import Header from "../Components/Header";
 
@@ -49,7 +51,7 @@ function TopicPage() {
   let allTopics = topics.map((t) => t.slug);
 
   if (topics.length > 0 && topic && !allTopics.includes(topic)) {
-    return <TopicErrorPage incorrectTopic={topic} />;
+    return <TopicError incorrectTopic={topic} />;
   }
 
   return (
@@ -61,76 +63,20 @@ function TopicPage() {
       <main>
         <p className="header">View articles by topic</p>
 
-        <form>
-          <label htmlFor="topic">Select a topic</label>
-          <select
-            name="topic"
-            id="topic"
-            value={topic || "default"}
-            onChange={(e) => navigate(`/topics/${e.target.value}`)}
-            aria-label="Select Topic"
-          >
-            <option value="default" disabled>
-              Select Topic
-            </option>
-            {topics.length === 0 ? (
-              <option disabled>{"Loading topics..."}</option>
-            ) : (
-              topics.map((category) => (
-                <option key={category.slug} value={category.slug}>
-                  {category.slug}
-                </option>
-              ))
-            )}
-          </select>
-        </form>
-
-        <form>
-          <label htmlFor="sortby" aria-label="Sort articles by">
-            Sort by:
-          </label>
-          <select
-            name="sortby"
-            id="sortby"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            required
-            aria-label="Sort by"
-          >
-            <option value="created_at">Date</option>
-            <option value="author">Author</option>
-            <option value="votes">Votes</option>
-            <option value="title">Title</option>
-          </select>
-        </form>
-
-        <form>
-          <label htmlFor="order" aria-label="Select order">
-            Order:
-          </label>
-          <select
-            name="order"
-            id="order"
-            value={order}
-            onChange={(e) => setOrder(e.target.value)}
-            required
-            aria-label="Select order"
-          >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </form>
+        <TopicSelector topics={topics} currentTopic={topic} />
+        <SortOrderSelector
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          order={order}
+          setOrder={setOrder}
+        />
 
         {loadingArticles ? (
           <LoadingComponent input="articles" />
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
-          <section className="grid-container" aria-labelledby="article-list">
-            {topicArticles.map((article) => (
-              <ArticleCard key={article.article_id} article={article} />
-            ))}
-          </section>
+          <TopicArticleList topicArticles={topicArticles} />
         )}
       </main>
     </>

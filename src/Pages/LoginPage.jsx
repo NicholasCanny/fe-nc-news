@@ -4,10 +4,11 @@ import NavBar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import dogImg from "../assets/Dog.jpg";
 import Header from "../Components/Header";
+import LoginForm from "../Components/LoginForm";
 
 function LoginPage() {
   const { setLoggedInUser } = useContext(UserContext);
-  const [username, setUsername] = useState("");
+  const [username, setUserName] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -31,30 +32,16 @@ function LoginPage() {
       </div>
       <h1 className="header2">Who are you? </h1>
       <p className="header2">Please enter a username below to login</p>
-
-      <div className="login-container">
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="e.g. jessjelly"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          <br />
-          <button type="submit" className="button">
-            Login
-          </button>
-        </form>
-      </div>
-      <br />
+      <LoginForm
+        handleLogin={handleLogin}
+        username={username}
+        setUserName={setUserName}
+      />
       <p className="header2">
         This will allow you to post and delete your very own comments 🙂
       </p>
-      <br />
       <p className="header2">
-        Currently, you can only use users who already exist in the database
+        Currently, you can only choose users who already exist in the database
       </p>
     </div>
   );

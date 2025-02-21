@@ -8,8 +8,7 @@ function MainErrorPage() {
       <NavBar />
       <Header />
       <p className="header2">
-        {" "}
-        Excuse me, trying to take care of business here, choose a valid page!{" "}
+        Excuse me, trying to take care of business here, choose a valid page!
       </p>
       <div className="image-container">
         <img
