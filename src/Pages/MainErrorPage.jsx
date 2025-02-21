@@ -1,11 +1,12 @@
 import NavBar from "../Components/Navbar";
 import monkeyImg from "../assets/Monkey.jpeg";
+import Header from "../Components/Header";
 
 function MainErrorPage() {
   return (
     <main>
       <NavBar />
-      <h1 className="header">FAUX REDDIT</h1>
+      <Header />
       <p className="header2">
         {" "}
         Excuse me, trying to take care of business here, choose a valid page!{" "}

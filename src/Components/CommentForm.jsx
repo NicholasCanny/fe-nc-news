@@ -1,6 +1,7 @@
 import { postComment } from "../api";
 import { UserContext } from "../UserContext";
 import { useContext, useState } from "react";
+import playButtonClickSound from "./ButtonClick";
 
 function CommentForm({ article_id, handleNewComment }) {
   const { loggedInUser } = useContext(UserContext);
@@ -20,6 +21,7 @@ function CommentForm({ article_id, handleNewComment }) {
       return;
     } else {
       setLoading(true);
+      playButtonClickSound();
 
       const formData = {
         username: loggedInUser,

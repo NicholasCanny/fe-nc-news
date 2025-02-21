@@ -4,10 +4,14 @@ const ncnewsApi = axios.create({
   baseURL: "https://nicholascannybackendproject.onrender.com/api",
 });
 
-export const fetchArticles = () => {
-  return ncnewsApi.get("/articles").then((response) => {
-    return response.data.articles;
-  });
+export const fetchArticles = (sort_by, order, topic) => {
+  return ncnewsApi
+    .get("/articles", {
+      params: { sort_by, order, topic },
+    })
+    .then((response) => {
+      return response.data.articles;
+    });
 };
 
 export const fetchIndividualArticle = (articleID) => {
@@ -39,21 +43,11 @@ export const postComment = (article_id, comment) => {
 };
 
 export const removeComment = (comment_id) => {
-  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {
-    return;
-  });
+  return ncnewsApi.delete(`/comments/${comment_id}`);
 };
 
-export const fetchTopics = (articleID) => {
+export const fetchTopics = () => {
   return ncnewsApi.get(`/topics`).then((response) => {
     return response.data.topics;
   });
-};
-
-export const fetchArticlesWithTopic = (sort_by, order, topic) => {
-  return ncnewsApi
-    .get(`/articles?sort_by=${sort_by}&order=${order}&topic=${topic}`)
-    .then((response) => {
-      return response.data.articles;
-    });
 };

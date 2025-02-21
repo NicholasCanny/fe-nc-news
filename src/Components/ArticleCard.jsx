@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import FormatDate from "./FormatDate";
+import playButtonClickSound from "./ButtonClick";
 
 function ArticleCard({ article }) {
   const {
@@ -38,7 +39,9 @@ function ArticleCard({ article }) {
       </p>
 
       <Link to={`/articles/${article_id}`}>
-        <button className="button">Go to article</button>
+        <button onClick={playButtonClickSound} className="button">
+          Go to article
+        </button>
       </Link>
     </section>
   );
