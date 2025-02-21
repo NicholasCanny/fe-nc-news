@@ -11,11 +11,13 @@ function MainErrorPage() {
         {" "}
         Excuse me, trying to take care of business here, choose a valid page!{" "}
       </p>
-      <img
-        className="image-container"
-        src={monkeyImg}
-        alt="Image of a monkey on a laptop"
-      />
+      <div className="image-container">
+        <img
+          className="image-container"
+          src={monkeyImg}
+          alt="Image of a monkey on a laptop"
+        />
+      </div>
     </main>
   );
 }
