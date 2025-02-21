@@ -1,11 +1,12 @@
 import NavBar from "../Components/Navbar";
 import monkeyImg from "../assets/Monkey.jpeg";
+import Header from "../Components/Header";
 
 function ArticleErrorPage() {
   return (
     <main>
       <NavBar />
-      <h1 className="header">WELCOME TO NC NEWS</h1>
+      <Header />
       <p className="header">
         {" "}
         Excuse me, trying to take care of business here, try choosing a valid

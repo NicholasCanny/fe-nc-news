@@ -1,12 +1,13 @@
 import ArticleList from "../Components/ArticleList";
 import NavBar from "../Components/Navbar";
+import Header from "../Components/Header";
 
 function HomePage() {
   return (
     <>
       <header>
         <NavBar />
-        <h1 className="header">FAUX REDDIT</h1>
+        <Header />
       </header>
       <main>
         <p className="header">Here is a list of all available articles</p>

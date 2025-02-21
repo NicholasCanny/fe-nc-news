@@ -1,94 +1,134 @@
+body {
+  margin-top: 60px;
+}
+
+main {
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .grid-container {
-  max-width: 1000px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   justify-items: center;
   margin: 0 auto;
   padding: 5px;
-  border: 2px solid;
+  border: 2px solid black;
 }
 
+.card,
+.individual-article-card,
 .article-card {
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
   border: 2px solid #007bff;
   border-radius: 10px;
-  padding: 5px;
-  margin: 10px;
-  background-color: rgb(255, 255, 255);
-  text-align: center;
-  font-family: "Grechen Fuemen", serif;
-  font-weight: 400;
-  font-style: normal;
+  background-color: #fff;
 }
 
-.individual-article-card {
-  max-width: 100%;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  font-family: "Grechen Fuemen", serif;
-  font-weight: 400;
-  font-style: normal;
+.article-card p {
+  flex-grow: 1;
+}
+
+.article-card button {
+  margin-top: auto;
+}
+
+.card:hover,
+.article-card:hover,
+.individual-article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 20px auto;
+  margin-bottom: 20px;
   width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
 }
 
 .article-img {
   width: 100%;
   height: auto;
-  max-width: 100%;
   border-radius: 8px;
 }
 
 .header {
   width: 100%;
   text-align: center;
-  color: #007bff;
+  color: blue;
   padding: 10px;
   font-family: "Lobster", serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .header2 {
   text-align: center;
-  color: #000000;
+  color: black;
   padding: 10px;
-  font-family: "Grechen Fuemen", serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
+/* Buttons */
+button,
+.likebutton,
 .button {
-  background-color: #230fd5;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+}
+
+.button {
+  background-color: #230fd5;
+}
+
+.button:hover {
+  background-color: #1a09a3;
+}
+
+.button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
 }
 
 .likebutton {
-  background-color: #0a745d;
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  background-color: #28a745;
   margin: 5px 5px;
+}
+
+.likebutton:hover {
+  background-color: #218838;
+}
+
+.likebutton:disabled {
+  background-color: #a3d8a8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
 }
 
 .comment-card {
@@ -97,15 +137,12 @@
   margin: 5px 0;
   background-color: #f9f9f9;
   border-radius: 8px;
-  font-family: "Grechen Fuemen", serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .comment-author {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #000000;
+  color: black;
 }
 
 form {
@@ -120,11 +157,81 @@ form {
   color: #333;
 }
 
+form input,
+form select,
+form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: blue;
+  outline: none;
+}
+
 .navbar {
   background-color: #f7f1f1;
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 8px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-bottom: 2px solid #173aad;
+}
+
+.AlignCentre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .article-card {
+    padding: 15px;
+  }
+
+  form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .button,
+  .likebutton {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 14px;
+  }
 }

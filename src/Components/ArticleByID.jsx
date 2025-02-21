@@ -5,6 +5,7 @@ import LoadingComponent from "./LoadingComponent";
 import CommentForm from "./CommentForm";
 import FormatDate from "./FormatDate";
 import { removeComment } from "../api";
+import playButtonClickSound from "./ButtonClick";
 
 function ArticleByID({ article_id }) {
   const [article, setArticle] = useState(null);
@@ -16,11 +17,17 @@ function ArticleByID({ article_id }) {
   const [downVote, setDownVote] = useState(false);
 
   useEffect(() => {
-    fetchIndividualArticle(article_id).then((articleFromApi) => {
-      setArticle(articleFromApi);
-      setLoading(false);
-    });
-  }, []);
+    fetchIndividualArticle(article_id)
+      .then((articleFromApi) => {
+        setArticle(articleFromApi);
+      })
+      .catch((err) => {
+        setError("Article not found");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [article_id]);
 
   useEffect(() => {
     fetchComments(article_id).then((commentsFromApi) => {
@@ -44,6 +51,7 @@ function ArticleByID({ article_id }) {
 
   function toggleUpVote() {
     if (!upVote) {
+      playButtonClickSound();
       handleVote(1);
       if (downVote) {
         setDownVote(false);
@@ -54,6 +62,7 @@ function ArticleByID({ article_id }) {
 
   function toggleDownVote() {
     if (!downVote) {
+      playButtonClickSound();
       handleVote(-1);
       if (upVote) {
         setUpVote(false);
@@ -69,6 +78,7 @@ function ArticleByID({ article_id }) {
   }
 
   function deleteComment(comment_id) {
+    playButtonClickSound();
     removeComment(comment_id)
       .then(() => fetchComments(article_id))
       .then((updatedComments) => {
@@ -80,8 +90,8 @@ function ArticleByID({ article_id }) {
     return <LoadingComponent input="article" />;
   }
 
-  if (!article) {
-    return <p>Article not found</p>;
+  if (error) {
+    return <p className="header2">{error}</p>;
   }
 
   return (

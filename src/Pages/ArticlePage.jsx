@@ -1,6 +1,7 @@
 import ArticleByID from "../Components/ArticleByID";
 import { useParams } from "react-router-dom";
 import NavBar from "../Components/Navbar";
+import Header from "../Components/Header";
 
 function ArticlePage() {
   const { article_id } = useParams();
@@ -8,8 +9,7 @@ function ArticlePage() {
   return (
     <main>
       <NavBar />
-      <h1 className="header">FAUX REDDIT</h1>
-      <p className="header"> Here is the article you requested</p>
+      <Header />
       <ArticleByID article_id={article_id} />
     </main>
   );

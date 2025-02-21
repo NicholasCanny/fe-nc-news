@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import NavBar from "../Components/Navbar";
-import { fetchTopics, fetchArticlesWithTopic } from "../api";
+import { fetchTopics, fetchArticles } from "../api";
 import ArticleCard from "../Components/ArticleCard";
 import TopicErrorPage from "./TopicErrorPage";
 import LoadingComponent from "../Components/LoadingComponent";
+import Header from "../Components/Header";
 
 function TopicPage() {
   const [topics, setTopics] = useState([]);
   const [topicArticles, setTopicArticles] = useState([]);
   const [sortBy, setSortBy] = useState("created_at");
   const [order, setOrder] = useState("asc");
-  const [loading, setLoading] = useState(true);
+  const [loadingArticles, setLoadingArticles] = useState(false);
+  const [error, setError] = useState(null);
 
   const { topic } = useParams();
   const navigate = useNavigate();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -24,39 +25,41 @@ function TopicPage() {
 
   useEffect(() => {
     if (topic) {
-      fetchArticlesWithTopic(sortBy, order, topic).then(setTopicArticles);
-    } else {
-      setTopicArticles([]);
+      setLoadingArticles(true);
+      setError(null);
+
+      fetchArticles(sortBy, order, topic)
+        .then((articles) => {
+          setTopicArticles(articles);
+          setLoadingArticles(false);
+        })
+        .catch(() => {
+          setError("Articles not found");
+          setLoadingArticles(false);
+        });
     }
   }, [sortBy, order, topic]);
 
   useEffect(() => {
-    fetchTopics().then((topicsFromApi) => {
-      setTopics(topicsFromApi);
-      setLoading(false);
-    });
+    fetchTopics()
+      .then(setTopics)
+      .catch(() => setError("Failed to load topics"));
   }, []);
 
-  let allTopics = topics.map((topic) => topic.slug);
+  let allTopics = topics.map((t) => t.slug);
 
   if (topics.length > 0 && topic && !allTopics.includes(topic)) {
     return <TopicErrorPage incorrectTopic={topic} />;
-  }
-
-  if (loading) {
-    return <LoadingComponent input="topics" />;
   }
 
   return (
     <>
       <header>
         <NavBar />
-        <h1 className="header">FAUX REDDIT</h1>
+        <Header />
       </header>
       <main>
-        <p className="header">
-          Here is a list of all available articles by topic
-        </p>
+        <p className="header">View articles by topic</p>
 
         <form>
           <select
@@ -68,14 +71,14 @@ function TopicPage() {
             <option value="default" disabled>
               Select Topic
             </option>
-            {topics.length > 0 ? (
+            {topics.length === 0 ? (
+              <option disabled>{"Loading topics..."}</option>
+            ) : (
               topics.map((category) => (
                 <option key={category.slug} value={category.slug}>
                   {category.slug}
                 </option>
               ))
-            ) : (
-              <option disabled>Loading topics...</option>
             )}
           </select>
         </form>
@@ -85,13 +88,10 @@ function TopicPage() {
           <select
             name="sortby"
             id="sortby"
-            value={sortBy || "default"}
+            value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             required
           >
-            <option value="default" disabled>
-              Select
-            </option>
             <option value="created_at">Date</option>
             <option value="author">Author</option>
             <option value="votes">Votes</option>
@@ -104,23 +104,26 @@ function TopicPage() {
           <select
             name="order"
             id="order"
-            value={order || "default"}
+            value={order}
             onChange={(e) => setOrder(e.target.value)}
             required
           >
-            <option value="default" disabled>
-              Select
-            </option>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
         </form>
 
-        <section className="grid-container">
-          {topicArticles.map((article) => (
-            <ArticleCard key={article.article_id} article={article} />
-          ))}
-        </section>
+        {loadingArticles ? (
+          <LoadingComponent input="articles" />
+        ) : error ? (
+          <p className="error-message">{error}</p>
+        ) : (
+          <section className="grid-container">
+            {topicArticles.map((article) => (
+              <ArticleCard key={article.article_id} article={article} />
+            ))}
+          </section>
+        )}
       </main>
     </>
   );
