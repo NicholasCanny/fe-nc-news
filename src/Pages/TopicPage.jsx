@@ -62,11 +62,13 @@ function TopicPage() {
         <p className="header">View articles by topic</p>
 
         <form>
+          <label htmlFor="topic">Select a topic</label>
           <select
             name="topic"
             id="topic"
             value={topic || "default"}
             onChange={(e) => navigate(`/topics/${e.target.value}`)}
+            aria-label="Select Topic"
           >
             <option value="default" disabled>
               Select Topic
@@ -84,13 +86,16 @@ function TopicPage() {
         </form>
 
         <form>
-          <label htmlFor="sortby">Sort by: </label>
+          <label htmlFor="sortby" aria-label="Sort articles by">
+            Sort by:
+          </label>
           <select
             name="sortby"
             id="sortby"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             required
+            aria-label="Sort by"
           >
             <option value="created_at">Date</option>
             <option value="author">Author</option>
@@ -100,13 +105,16 @@ function TopicPage() {
         </form>
 
         <form>
-          <label htmlFor="order">Order: </label>
+          <label htmlFor="order" aria-label="Select order">
+            Order:
+          </label>
           <select
             name="order"
             id="order"
             value={order}
             onChange={(e) => setOrder(e.target.value)}
             required
+            aria-label="Select order"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -118,7 +126,7 @@ function TopicPage() {
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
-          <section className="grid-container">
+          <section className="grid-container" aria-labelledby="article-list">
             {topicArticles.map((article) => (
               <ArticleCard key={article.article_id} article={article} />
             ))}

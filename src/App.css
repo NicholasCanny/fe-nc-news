@@ -69,6 +69,12 @@ main {
   border-radius: 8px;
 }
 
+.login-img {
+  width: 80%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .header {
   width: 100%;
   text-align: center;
