@@ -7,14 +7,9 @@ function TopicErrorPage() {
     <main>
       <NavBar />
       <Header />
-
       <p className="header2"> Wake up human, this topic doesn't exist! </p>
       <div className="image-container">
-        <img
-          className="image-container"
-          src={catImg}
-          alt="Image of a surprised cat"
-        />
+        <img src={catImg} alt="Image of a surprised cat" />
       </div>
     </main>
   );
